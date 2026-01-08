@@ -5,8 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Dieta & Treino</title>
 
-  <!-- PWA Manifest -->
-  <link rel="manifest" href="data:application/json,{&quot;name&quot;:&quot;Dieta & Treino&quot;,&quot;short_name&quot;:&quot;DietaTreino&quot;,&quot;start_url&quot;:&quot;.&quot;,&quot;display&quot;:&quot;standalone&quot;,&quot;background_color&quot;:&quot;#f5f5f7&quot;,&quot;theme_color&quot;:&quot;#ffffff&quot;}" />
+  <!-- Manifest PWA -->
+  <link rel="manifest" href="manifest.json">
+
+  <meta name="theme-color" content="#ffffff">
 
   <style>
     :root {
@@ -74,21 +76,12 @@
     .screen { display: none; }
     .screen.active { display: block; }
 
-    input, select {
+    input {
       width: 100%;
       padding: 12px;
       border-radius: 12px;
       border: 1px solid #e5e5ea;
       font-size: 16px;
-      margin-top: 6px;
-    }
-
-    label {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      margin-bottom: 8px;
-      font-size: 15px;
     }
   </style>
 </head>
@@ -111,142 +104,82 @@
 
   <div id="modoBanner" class="card" style="font-weight:600"></div>
 
-  <!-- DIETA -->
   <div id="dieta" class="screen active">
     <div class="card">
       <h3>⚖️ Registo de Peso</h3>
       <input type="number" id="pesoInput" />
-      <p style="font-size:14px;color:#666">Atualiza o peso para ajustes automáticos.</p>
-    </div>
-
-    <div class="card">
-      <h3>🍽️ Dieta Semanal</h3>
-      <select id="daySelect">
-        <option value="seg">Segunda</option>
-        <option value="ter">Terça</option>
-        <option value="qua">Quarta</option>
-        <option value="qui">Quinta</option>
-        <option value="sex">Sexta</option>
-        <option value="sab">Sábado</option>
-        <option value="dom">Domingo (Refeed)</option>
-      </select>
-    </div>
-
-    <div id="seg" class="card day">
-      <label><input type="checkbox"> Pequeno-almoço: 80g aveia + 30g whey</label>
-      <label><input type="checkbox"> Lanche manhã: 170g skyr + banana</label>
-      <label><input type="checkbox"> Almoço: 180g frango + 100g arroz</label>
-      <label><input type="checkbox"> Lanche tarde: 30g whey + 20g amêndoas</label>
-      <label><input type="checkbox"> Jantar: 180g pescada + 250g batata</label>
-      <label><input type="checkbox"> Ceia: 200g quark</label>
-    </div>
-
-    <div id="ter" class="card day" style="display:none">
-      <label><input type="checkbox"> Pequeno-almoço: 3 ovos + pão integral</label>
-      <label><input type="checkbox"> Lanche manhã: maçã + nozes</label>
-      <label><input type="checkbox"> Almoço: peru + massa integral</label>
-      <label><input type="checkbox"> Lanche tarde: iogurte proteico</label>
-      <label><input type="checkbox"> Jantar: salmão + legumes</label>
-      <label><input type="checkbox"> Ceia: caseína</label>
-    </div>
-
-    <div id="qua" class="card day" style="display:none">
-      <label><input type="checkbox"> Panquecas de aveia</label>
-      <label><input type="checkbox"> Skyr</label>
-      <label><input type="checkbox"> Carne magra + batata-doce</label>
-      <label><input type="checkbox"> Barra proteica</label>
-      <label><input type="checkbox"> Frango + legumes</label>
-      <label><input type="checkbox"> Queijo fresco</label>
-    </div>
-
-    <div id="qui" class="card day" style="display:none">
-      <label><input type="checkbox"> Aveia + whey</label>
-      <label><input type="checkbox"> Fruta</label>
-      <label><input type="checkbox"> Frango + arroz</label>
-      <label><input type="checkbox"> Skyr</label>
-      <label><input type="checkbox"> Peixe branco</label>
-      <label><input type="checkbox"> Quark</label>
-    </div>
-
-    <div id="sex" class="card day" style="display:none">
-      <label><input type="checkbox"> Aveia + whey</label>
-      <label><input type="checkbox"> Banana</label>
-      <label><input type="checkbox"> Peru + arroz</label>
-      <label><input type="checkbox"> Iogurte</label>
-      <label><input type="checkbox"> Hambúrguer magro</label>
-      <label><input type="checkbox"> Caseína</label>
-    </div>
-
-    <div id="sab" class="card day" style="display:none">
-      <label><input type="checkbox"> Ovos + pão</label>
-      <label><input type="checkbox"> Iogurte</label>
-      <label><input type="checkbox"> Refeição livre controlada</label>
-      <label><input type="checkbox"> Whey</label>
-      <label><input type="checkbox"> Peixe + batata</label>
-      <label><input type="checkbox"> Ceia opcional</label>
-    </div>
-
-    <div id="dom" class="card day" style="display:none">
-      <label><input type="checkbox"> Aveia + fruta</label>
-      <label><input type="checkbox"> Iogurte + mel</label>
-      <label><input type="checkbox"> Refeição livre</label>
-      <label><input type="checkbox"> Pão / panquecas</label>
-      <label><input type="checkbox"> Proteína + arroz</label>
-      <label><input type="checkbox"> Ceia opcional</label>
+      <p style="font-size:14px;color:#666">
+        Ajuste automático de calorias e macros.
+      </p>
     </div>
   </div>
 
-  <!-- TREINO -->
   <div id="treino" class="screen">
     <div class="card">
-      <h3>🏋️ Progressão de Cargas</h3>
-      <label>Supino <input type="number" id="supino"></label>
-      <label>Agachamento <input type="number" id="agachamento"></label>
-      <label>Terra <input type="number" id="terra"></label>
-      <p style="font-size:14px;color:#666">Progressão automática se o peso estiver estável.</p>
+      <h3>🏋️ Treino</h3>
+      <p>5x ginásio + cardio</p>
     </div>
   </div>
 
-  <!-- COMPRAS -->
   <div id="compras" class="screen">
     <div class="card">
       <h3>🛒 Lista de Compras</h3>
-      <ul id="listaCompras"></ul>
+      <p>Gerada automaticamente</p>
     </div>
   </div>
 
 </div>
 
 <script>
+  // Tabs
+  document.querySelectorAll('.tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+      tab.classList.add('active');
+      document.getElementById(tab.dataset.screen).classList.add('active');
+    });
+  });
+
+  // Peso
   const pesoInput = document.getElementById('pesoInput');
   const pesoDisplay = document.getElementById('pesoDisplay');
-  const banner = document.getElementById('modoBanner');
-  const daySelect = document.getElementById('daySelect');
-  const days = document.querySelectorAll('.day');
+  let peso = Number(localStorage.getItem('peso')) || 94;
 
-  let peso = parseFloat(localStorage.getItem('peso')) || 94;
   pesoInput.value = peso;
   pesoDisplay.textContent = peso;
 
-  pesoInput.onchange = () => {
-    peso = parseFloat(pesoInput.value);
+  pesoInput.addEventListener('change', () => {
+    peso = Number(pesoInput.value);
     localStorage.setItem('peso', peso);
     pesoDisplay.textContent = peso;
-    atualizarModo();
-  };
+    atualizarModo(peso);
+  });
 
-  function atualizarModo() {
-    if (peso <= 84) banner.textContent = '🟢 MANUTENÇÃO';
-    else if (peso <= 86) banner.textContent = '🟣 BULK LIMPO';
-    else banner.textContent = '🔵 CUT';
+  function atualizarModo(peso) {
+    const banner = document.getElementById('modoBanner');
+
+    if (peso <= 84) {
+      banner.textContent = '🟢 MANUTENÇÃO';
+      banner.style.background = '#34c759';
+      banner.style.color = '#fff';
+    } else if (peso <= 88) {
+      banner.textContent = '🟣 BULK LIMPO';
+      banner.style.background = '#af52de';
+      banner.style.color = '#fff';
+    } else {
+      banner.textContent = '🔵 CUT';
+      banner.style.background = '#0a84ff';
+      banner.style.color = '#fff';
+    }
   }
 
-  atualizarModo();
+  atualizarModo(peso);
 
-  daySelect.onchange = () => {
-    days.forEach(d => d.style.display = 'none');
-    document.getElementById(daySelect.value).style.display = 'block';
-  };
+  // Service Worker
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('sw.js');
+  }
 </script>
 
 </body>
